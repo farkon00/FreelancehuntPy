@@ -41,3 +41,15 @@ class Client:
             headers={**headers, "Authorization" : f"Bearer {self._key}"}, 
             params={i : self._value_to_param(j) for i, j in kwargs.items()}
         ).json()
+
+    def get_projects(self, only_my_skills: bool = False, skill_id: list[int] = None, 
+        employer_id: int = None, only_for_plus: bool = False
+    ):
+        params = {
+            "only_my_skills" : only_my_skills,
+            "skill_id" : skill_id,
+            "employer_id" : employer_id,
+            "only_for_plus" : only_for_plus
+        }
+
+        return self.get("projects", **params)
